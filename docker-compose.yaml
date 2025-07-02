@@ -1,0 +1,17 @@
+services:
+  api-tests:
+    image: api-tests:v1
+    container_name: api_automation_container
+    build:
+      context: .
+    volumes:
+      - ./:/usr/workspace
+    command: bash -c "
+      if [ -n \"$$SUITE\" ]; then
+        STAGE=$$STAGE pytest -sv -m $$SUITE --alluredir=allure-results;
+      else
+        STAGE=$$STAGE pytest -sv --alluredir=allure-results;
+      fi"
+    environment:
+      STAGE: prod
+      API_TOKEN: ${API_TOKEN}

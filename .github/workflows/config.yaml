@@ -1,0 +1,57 @@
+name: API Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      filtering_tests:
+        description: 'Choose a mark'
+        required: true
+        default: all
+        type: choice
+        options:
+          - users
+          - all
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run all api-tests
+        if: "github.event.inputs.filtering_tests == 'all'"
+        env:
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+        run: |
+          docker compose run api-tests
+
+      - name: Run users api-tests
+        if: "github.event.inputs.filtering_tests == 'users'"
+        env:
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+        run: |
+          docker compose run -e SUITE=users api-tests
+
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        if: always()
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - uses: simple-elf/allure-report-action@master
+        if: always()
+        id: allure-report
+        with:
+          allure_results: allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+
+      - uses: peaceiris/actions-gh-pages@v2
+        if: always()
+        env:
+          PERSONAL_TOKEN: ${{ secrets.CI_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
