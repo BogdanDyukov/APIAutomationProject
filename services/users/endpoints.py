@@ -1,9 +1,7 @@
-import os
-
-HOST = "https://dev-gs.qa-playground.com/api/v1" if os.environ["STAGE"] == "qa" else "https://release-gs.qa-playground.com/api/v1"
+from config.links import Links
 
 
 class Endpoints:
-    print(HOST)
-    create_user = f"{HOST}/users"
-    get_user_by_id = lambda self, uuid: f"{HOST}/users/{uuid}"
+    create_user = f"{Links.HOST}/users"
+    get_user_by_id = lambda self, uuid: f"{Links.HOST}/users/{uuid}"
+    get_users_with_filtering = lambda self, offset, limit: f"{Links.HOST}/users?offset={offset}&limit={limit}"

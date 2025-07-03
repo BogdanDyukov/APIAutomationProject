@@ -1,7 +1,7 @@
 from pydantic import BaseModel, field_validator
 
 
-class UserModel(BaseModel):
+class UserResponse(BaseModel):
     email: str
     name: str
     nickname: str

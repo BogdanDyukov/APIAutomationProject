@@ -1,34 +1,41 @@
+import allure
 import requests
 
 from config.headers import Headers
 from services.users.endpoints import Endpoints
-from services.users.models.user_model import UserModel
-from services.users.payloads import Payloads
 from utils.helper import Helper
 
 
 class UsersAPI(Helper):
 
     def __init__(self):
-        self.payloads = Payloads()
         self.endpoints = Endpoints()
         self.headers = Headers()
 
-    def create_user(self):
+    @allure.step("Создание пользователя")
+    def create_user(self, user_payload):
         response = requests.post(
             url=self.endpoints.create_user,
             headers=self.headers.basic,
-            json=self.payloads.create_user
+            json=user_payload
         )
-        assert response.status_code == 200, response.json()
         self.attach_response(response.json())
-        return UserModel(**response.json())
+        return response
 
+    @allure.step("Получение пользователя по id")
     def get_user_by_id(self, uuid):
         response = requests.get(
             url=self.endpoints.get_user_by_id(uuid),
             headers=self.headers.basic,
         )
-        assert response.status_code == 200, response.json()
         self.attach_response(response.json())
-        return UserModel(**response.json())
+        return response
+
+    @allure.step("Получение всех доступных пользователей с фильтрацией")
+    def get_all_users_with_filtering(self, offset, limit):
+        response = requests.get(
+            url=self.endpoints.get_users_with_filtering(offset, limit),
+            headers=self.headers.basic
+        )
+        self.attach_response(response.json())
+        return response
