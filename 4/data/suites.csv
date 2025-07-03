@@ -1,0 +1,8 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","1165","Корректное получение всех игр","tests.games","Thu Jul 03 13:52:31 GMT 2025","passed","Thu Jul 03 13:52:32 GMT 2025","TestGames","test_games","",""
+"","972","Некорректное создание пользователя (не передается никнейм)","tests.users","Thu Jul 03 13:52:34 GMT 2025","passed","Thu Jul 03 13:52:35 GMT 2025","TestUsers","test_users","",""
+"","2161","Корректное создание пользователя с проверкой","tests.users","Thu Jul 03 13:52:32 GMT 2025","passed","Thu Jul 03 13:52:34 GMT 2025","TestUsers","test_users","",""
+"","1007","Некорректное создание пользователя (не передается имя)","tests.users","Thu Jul 03 13:52:35 GMT 2025","passed","Thu Jul 03 13:52:36 GMT 2025","TestUsers","test_users","",""
+"","911","Корректное получение всех пользователей","tests.users","Thu Jul 03 13:52:38 GMT 2025","passed","Thu Jul 03 13:52:39 GMT 2025","TestUsers","test_users","",""
+"","812","Некорректное создание пользователя (не передается пароль)","tests.users","Thu Jul 03 13:52:36 GMT 2025","passed","Thu Jul 03 13:52:37 GMT 2025","TestUsers","test_users","",""
+"","1037","Некорректное создание пользователя (не передается почта)","tests.users","Thu Jul 03 13:52:37 GMT 2025","passed","Thu Jul 03 13:52:38 GMT 2025","TestUsers","test_users","",""
