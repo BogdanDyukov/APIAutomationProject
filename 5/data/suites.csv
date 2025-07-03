@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","1726","Корректное получение всех игр","tests.games","Thu Jul 03 13:57:14 GMT 2025","passed","Thu Jul 03 13:57:15 GMT 2025","TestGames","test_games","",""
