@@ -1,15 +1,22 @@
 import allure
 import pytest
 
+from services.users.api_users import UsersAPI
 from services.users.models.all_users_response import AllUsersResponse
 from services.common.models.error_response import ErrorResponse
 from services.users.models.user_response import UserResponse
 from services.users.payloads import Payloads
 
 
+@pytest.fixture(scope="class", autouse=True)
+def init_api_users(request):
+    request.cls.api_users = UsersAPI()
+
+
 @pytest.mark.users
 @allure.epic("Управление пользователями")
 class TestUsers:
+    api_users: UsersAPI
 
     @allure.feature("Создание пользователя")
     @allure.title("Корректное создание пользователя с проверкой")
@@ -38,6 +45,6 @@ class TestUsers:
     @allure.feature("Получение списка пользователей")
     @allure.title("Корректное получение всех пользователей")
     def test_get_all_users(self):
-        response = self.api_users.get_all_users_with_filtering(0, 20)
+        response = self.api_users.get_all_users(0, 20)
         assert response.status_code == 200, response.json()
         AllUsersResponse(**response.json())

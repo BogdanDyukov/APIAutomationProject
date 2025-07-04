@@ -13,11 +13,28 @@ class GamesAPI(Helper):
         self.headers = Headers()
 
     @allure.step("Получение всех доступных игр с фильтрацией")
-    def get_all_games_with_filtering(self, offset, limit):
+    def get_all_games(self, offset, limit):
         response = requests.get(
-            url=self.endpoints.get_all_games_with_filtering(offset, limit),
+            url=self.endpoints.get_all_games(offset, limit),
             headers=self.headers.basic
         )
         self.attach_response(response.json())
         return response
 
+    @allure.step("Поиск игр по имени с фильтрацией")
+    def search_games_by_name(self, query, offset, limit):
+        response = requests.get(
+            url=self.endpoints.search_games_by_name(query, offset, limit),
+            headers=self.headers.basic
+        )
+        self.attach_response(response.json())
+        return response
+
+    @allure.step("Получение игры по id")
+    def get_game_by_id(self, uuid):
+        response = requests.get(
+            url=self.endpoints.get_game_by_id(uuid),
+            headers=self.headers.basic
+        )
+        self.attach_response(response.json())
+        return response

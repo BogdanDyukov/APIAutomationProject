@@ -32,9 +32,9 @@ class UsersAPI(Helper):
         return response
 
     @allure.step("Получение всех доступных пользователей с фильтрацией")
-    def get_all_users_with_filtering(self, offset, limit):
+    def get_all_users(self, offset, limit):
         response = requests.get(
-            url=self.endpoints.get_users_with_filtering(offset, limit),
+            url=self.endpoints.get_all_users(offset, limit),
             headers=self.headers.basic
         )
         self.attach_response(response.json())
